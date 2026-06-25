@@ -11,7 +11,7 @@ Pace it calm and deliberate (~140 wpm) — let the visuals carry the weight, don
 ### Slide 1 · Hook — `0:00–0:14`
 *On screen: the phone mockup.*
 
-> This is **SliceMatic** — a Delhi pizza outlet where every order still comes in over the phone.
+> This is **SliceMatic** — a Delhi pizza outlet where every order still comes in over the phone, as you can see it's a delivery optmised business with only 8 dine in seating.
 > We turn that phone call into a **system**: it takes the order, gets the bill exactly right, and
 > learns from every one. `(pause)` Same kitchen, same riders — a smarter business.
 
