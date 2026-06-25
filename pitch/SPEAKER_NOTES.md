@@ -42,7 +42,7 @@ Pace it calm and deliberate (~140 wpm) — let the visuals carry the weight, don
 ---
 
 ### Slide 4 · The Economics — `0:51–1:13`
-*On screen: the meter auto-flips from **Before** (margin leaking) to **Now** (Rs.644 kept). Tap the toggle to replay the contrast.*
+*On screen: a slow ~6s reveal — the meter auto-flips **Before → Now** (Rs.644 kept), then the breakdown builds line-by-line below. Pace your words to it; tap the toggle to replay the contrast.*
 
 > Look at a single order. **Eight-forty-seven** in revenue. By phone, that margin leaks at every
 > step — wrong bills, missed orders. With our system, after ingredients, packaging, delivery and

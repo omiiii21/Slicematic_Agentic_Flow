@@ -96,8 +96,8 @@
            background:repeating-linear-gradient(45deg,#281414,#281414 7px,#221011 7px,#221011 14px); color:#c9a3a3; font-size:clamp(9px,1vw,11px); border-right:1px dashed #4a2a2a; }
   .mcost b { color:#e7b3b3; font-size:1.35em; }
   .mmargin { width:76%; position:relative; display:grid; place-items:center; }
-  .mfill { position:absolute; inset:0; background:linear-gradient(90deg,var(--red),#fb7185); opacity:1; transition:opacity .55s ease; }
-  .mleaks { position:absolute; inset:0; opacity:0; transition:opacity .55s ease; }
+  .mfill { position:absolute; inset:0; background:linear-gradient(90deg,var(--red),#fb7185); opacity:1; transition:opacity 1.1s ease; }
+  .mleaks { position:absolute; inset:0; opacity:0; transition:opacity 1.1s ease; }
   .leak { position:absolute; top:0; bottom:0; border-left:2px dashed rgba(239,68,68,.85); }
   .leak span { position:absolute; top:7px; left:5px; font-size:clamp(9px,1vw,11px); color:#fca5a5; white-space:nowrap; }
   .mlbl { position:relative; z-index:2; text-align:center; color:#fff; font-weight:800; line-height:1.15; }
@@ -107,8 +107,32 @@
   .slide.st-before .mleaks { opacity:1; }
   .slide.st-before .lbl-now, .slide.st-before .cap-now { display:none; }
   .slide.st-before .lbl-before, .slide.st-before .cap-before { display:block; }
-  .mcap { margin-top:22px; font-size:clamp(14px,1.5vw,19px); line-height:1.5; max-width:64ch; }
+  .mcap { margin-top:18px; font-size:clamp(13px,1.45vw,18px); line-height:1.5; }
   .mcap b { color:#fff; } .mcap .hl { color:var(--red); font-weight:800; }
+  /* centered top block + Rs.644 derivation below */
+  #econ { text-align:center; }
+  #econ h2 { max-width:none; }
+  .econ-toggle { margin-left:auto; margin-right:auto; }
+  .meter { max-width:800px; margin-left:auto; margin-right:auto; }
+  .mcap { text-align:center; max-width:62ch; margin-left:auto; margin-right:auto; }
+  .econ-detail { max-width:800px; margin:16px auto 0; }
+  .detail-h { color:var(--muted); font-size:clamp(11px,1.2vw,14px); letter-spacing:.4px; margin-bottom:10px; }
+  .detail-h b { color:#fff; }
+  .calc { display:grid; gap:8px; }
+  .crow { display:grid; grid-template-columns:150px 1fr 78px; align-items:center; gap:14px; font-size:clamp(11px,1.2vw,15px); }
+  .crow .clabel { color:#d7d7de; text-align:left; }
+  .crow .clabel .ctag { color:var(--muted); font-size:.78em; }
+  .crow .ctrack { height:14px; background:rgba(255,255,255,.05); border-radius:5px; overflow:hidden; }
+  .crow .cfill { height:100%; width:0; border-radius:5px; }
+  .slide.active .crow .cfill { animation:grow 1.3s cubic-bezier(.2,.7,.2,1) forwards; animation-delay:var(--bd,3s); }
+  @keyframes grow { to { width:var(--w); } }
+  .cfill.rev { background:linear-gradient(90deg,#9b9ba6,#cfcfd6); }
+  .cfill.cost { background:linear-gradient(90deg,#7f1d1d,#b91c1c); }
+  .cfill.cm { background:linear-gradient(90deg,var(--red),#fb7185); box-shadow:0 0 16px rgba(239,68,68,.5); }
+  .crow .cval { text-align:right; font-variant-numeric:tabular-nums; color:#fff; font-weight:700; }
+  .crow.totalrow .clabel, .crow.totalrow .cval { font-weight:800; }
+  .crow.totalrow .clabel { color:#fff; }
+  .cmchip { display:inline-block; margin-left:6px; padding:1px 7px; border-radius:999px; font-size:.7em; font-weight:700; color:#ffd9d9; background:rgba(239,68,68,.18); }
 
   /* dashboard (slide 5) */
   .dash { width:100%; max-width:1080px; margin-top:24px; }
@@ -170,6 +194,7 @@
     .phone,.ping,.ticket,.miss-ring { animation:none !important; }
     .dbar { animation:none !important; transform:none !important; }
     .mfill,.mleaks { transition:none !important; }
+    .crow .cfill { animation:none !important; width:var(--w) !important; }
   }
   @media (max-width:860px) {
     .split { grid-template-columns:1fr; } .vis { display:none; }
@@ -335,8 +360,19 @@
         </div>
       </div>
       <div class="mcap reveal" style="--d:.55s">
-        <div class="cap-now">Each order clears <b>Rs.644</b> — so just <span class="hl">11 orders a day</span> breaks even, and we plan for <b>47/day</b>, about <span class="hl">4.3×</span>.</div>
-        <div class="cap-before">Hand-written bills, missed calls at the peak, nothing recorded — <b>margin leaks at every step</b>, and there's no data to fix it.</div>
+        <div class="cap-now">Just <span class="hl">11 orders/day</span> breaks even — we plan for <b>47</b>, about <span class="hl">4.3×</span>.</div>
+        <div class="cap-before"><b>Margin leaks at every step</b> — and there's no data to fix it.</div>
+      </div>
+      <div class="econ-detail reveal" style="--d:2.6s">
+        <div class="detail-h">How that <b style="color:var(--red)">Rs.644</b> is built — per pizza</div>
+        <div class="calc">
+          <div class="crow"><div class="clabel">Revenue <span class="ctag">ex-GST</span></div><div class="ctrack"><div class="cfill rev" style="--w:100%;--bd:2.9s"></div></div><div class="cval">Rs.847</div></div>
+          <div class="crow"><div class="clabel">− Ingredients</div><div class="ctrack"><div class="cfill cost" style="--w:17.5%;--bd:3.3s"></div></div><div class="cval">−148</div></div>
+          <div class="crow"><div class="clabel">− Packaging</div><div class="ctrack"><div class="cfill cost" style="--w:2.1%;--bd:3.7s"></div></div><div class="cval">−18</div></div>
+          <div class="crow"><div class="clabel">− Delivery <span class="ctag">per order</span></div><div class="ctrack"><div class="cfill cost" style="--w:2.6%;--bd:4.1s"></div></div><div class="cval">−22</div></div>
+          <div class="crow"><div class="clabel">− Payments <span class="ctag">1.8%</span></div><div class="ctrack"><div class="cfill cost" style="--w:1.8%;--bd:4.5s"></div></div><div class="cval">−15</div></div>
+          <div class="crow totalrow"><div class="clabel">Contribution margin<span class="cmchip">76%</span></div><div class="ctrack"><div class="cfill cm" style="--w:76%;--bd:5s"></div></div><div class="cval">Rs.644</div></div>
+        </div>
       </div>
     </section>
 
@@ -533,7 +569,7 @@
     if (slides[i] === econ) {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduce) { setEcon('now'); }
-      else { setEcon('before'); econTimer = setTimeout(() => setEcon('now'), 1300); }
+      else { setEcon('before'); econTimer = setTimeout(() => setEcon('now'), 2000); }
     }
   }
   const next = () => go(i + 1), prev = () => go(i - 1);
