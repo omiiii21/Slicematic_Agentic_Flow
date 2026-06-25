@@ -83,26 +83,32 @@
   .pcap .lead-line em { color:var(--red); font-style:normal; font-weight:800; }
   .pcap .sub-line { color:var(--muted); font-size:clamp(12px,1.3vw,15px); margin-top:7px; }
 
-  /* economics deduction chart (slide 4) */
-  .calc { margin-top:26px; max-width:740px; display:grid; gap:11px; }
-  .crow { display:grid; grid-template-columns:160px 1fr 96px; align-items:center; gap:16px; font-size:clamp(12px,1.3vw,16px); }
-  .crow .clabel { color:#d7d7de; }
-  .crow .clabel .ctag { color:var(--muted); font-size:.78em; }
-  .crow .ctrack { height:18px; background:rgba(255,255,255,.05); border-radius:6px; overflow:hidden; }
-  .crow .cfill { height:100%; width:0; border-radius:6px; }
-  .slide.active .crow .cfill { animation:grow 1s cubic-bezier(.2,.7,.2,1) forwards; animation-delay:var(--bd,.4s); }
-  @keyframes grow { to { width:var(--w); } }
-  .cfill.rev { background:linear-gradient(90deg,#9b9ba6,#cfcfd6); }
-  .cfill.cost { background:linear-gradient(90deg,#7f1d1d,#b91c1c); }
-  .cfill.cm  { background:linear-gradient(90deg,var(--red),#fb7185); box-shadow:0 0 18px rgba(239,68,68,.55); }
-  .crow .cval { text-align:right; font-variant-numeric:tabular-nums; color:#fff; font-weight:700; }
-  .crow.totalrow .clabel, .crow.totalrow .cval { font-weight:800; }
-  .crow.totalrow .clabel { color:#fff; }
-  .cmchip { display:inline-block; margin-left:8px; padding:1px 8px; border-radius:999px; font-size:.72em; font-weight:700;
-            color:#ffd9d9; background:rgba(239,68,68,.18); }
-  .bestrip { margin-top:24px; font-size:clamp(14px,1.5vw,20px); color:#d7d7de; max-width:60ch; line-height:1.5; }
-  .bestrip b { color:#fff; } .bestrip .hl { color:var(--red); font-weight:800; }
-  .bemath { margin-top:10px; color:var(--muted); font-size:clamp(11px,1.2vw,14px); font-variant-numeric:tabular-nums; }
+  /* economics: before / now toggle (slide 4) */
+  .econ-toggle { display:inline-flex; gap:5px; margin-top:18px; background:#17171d; border:1px solid #2a2a35; border-radius:999px; padding:5px; }
+  .econ-toggle button { border:none; background:transparent; color:var(--muted); padding:8px 20px; border-radius:999px;
+                        cursor:pointer; font-family:inherit; font-size:clamp(12px,1.3vw,15px); font-weight:600; transition:all .25s; }
+  .econ-toggle button.on { background:var(--red); color:#fff; box-shadow:0 0 18px rgba(239,68,68,.4); }
+  .meter { margin-top:26px; max-width:900px; }
+  .mhead { display:flex; justify-content:space-between; align-items:baseline; color:var(--muted); font-size:clamp(12px,1.25vw,15px); margin-bottom:9px; }
+  .mhead b { color:#fff; }
+  .mtrack { display:flex; height:clamp(60px,9vh,80px); border-radius:12px; overflow:hidden; background:#14141a; border:1px solid #26262f; }
+  .mcost { width:24%; padding:6px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; text-align:center;
+           background:repeating-linear-gradient(45deg,#281414,#281414 7px,#221011 7px,#221011 14px); color:#c9a3a3; font-size:clamp(9px,1vw,11px); border-right:1px dashed #4a2a2a; }
+  .mcost b { color:#e7b3b3; font-size:1.35em; }
+  .mmargin { width:76%; position:relative; display:grid; place-items:center; }
+  .mfill { position:absolute; inset:0; background:linear-gradient(90deg,var(--red),#fb7185); opacity:1; transition:opacity .55s ease; }
+  .mleaks { position:absolute; inset:0; opacity:0; transition:opacity .55s ease; }
+  .leak { position:absolute; top:0; bottom:0; border-left:2px dashed rgba(239,68,68,.85); }
+  .leak span { position:absolute; top:7px; left:5px; font-size:clamp(9px,1vw,11px); color:#fca5a5; white-space:nowrap; }
+  .mlbl { position:relative; z-index:2; text-align:center; color:#fff; font-weight:800; line-height:1.15; }
+  .mlbl .big { font-size:clamp(17px,2.3vw,28px); }
+  .lbl-before, .cap-before { display:none; }
+  .slide.st-before .mfill { opacity:.1; }
+  .slide.st-before .mleaks { opacity:1; }
+  .slide.st-before .lbl-now, .slide.st-before .cap-now { display:none; }
+  .slide.st-before .lbl-before, .slide.st-before .cap-before { display:block; }
+  .mcap { margin-top:22px; font-size:clamp(14px,1.5vw,19px); line-height:1.5; max-width:64ch; }
+  .mcap b { color:#fff; } .mcap .hl { color:var(--red); font-weight:800; }
 
   /* dashboard (slide 5) */
   .dash { width:100%; max-width:1080px; margin-top:24px; }
@@ -162,8 +168,8 @@
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity:1 !important; transform:none !important; animation:none !important; }
     .phone,.ping,.ticket,.miss-ring { animation:none !important; }
-    .crow .cfill,.dbar { animation:none !important; }
-    .crow .cfill { width:var(--w) !important; } .dbar { transform:none !important; }
+    .dbar { animation:none !important; transform:none !important; }
+    .mfill,.mleaks { transition:none !important; }
   }
   @media (max-width:860px) {
     .split { grid-template-columns:1fr; } .vis { display:none; }
@@ -298,44 +304,40 @@
       </div>
     </section>
 
-    <!-- 4 — ECONOMICS -->
-    <section class="slide" data-countup>
+    <!-- 4 — ECONOMICS (before / now) -->
+    <section class="slide" id="econ">
       <div class="kicker reveal" style="--d:.05s">The Economics</div>
-      <h2 class="reveal" style="--d:.15s">How we get to <span style="color:var(--red)">Rs.644</span> a&nbsp;pizza.</h2>
-      <div class="calc">
-        <div class="crow reveal" style="--d:.3s">
-          <div class="clabel">Revenue <span class="ctag">ex-GST</span></div>
-          <div class="ctrack"><div class="cfill rev" style="--w:100%;--bd:.4s"></div></div>
-          <div class="cval">Rs.847</div>
+      <h2 class="reveal" style="--d:.15s">Every order — <span style="color:var(--red)">before</span> vs <span style="color:var(--red)">now</span>.</h2>
+      <div class="econ-toggle reveal" style="--d:.3s">
+        <button data-state="before">Phone ordering</button>
+        <button data-state="now" class="on">SliceMatic</button>
+      </div>
+      <div class="meter reveal" style="--d:.42s">
+        <div class="mhead">
+          <span>Per order &middot; <b>Rs.847</b> revenue (ex-GST)</span>
+          <span class="cap-now">what you keep &rarr;</span>
+          <span class="cap-before" style="color:#fca5a5">what leaks away &rarr;</span>
         </div>
-        <div class="crow reveal" style="--d:.42s">
-          <div class="clabel">− Ingredients</div>
-          <div class="ctrack"><div class="cfill cost" style="--w:17.5%;--bd:.7s"></div></div>
-          <div class="cval">−148</div>
-        </div>
-        <div class="crow reveal" style="--d:.52s">
-          <div class="clabel">− Packaging</div>
-          <div class="ctrack"><div class="cfill cost" style="--w:2.1%;--bd:.85s"></div></div>
-          <div class="cval">−18</div>
-        </div>
-        <div class="crow reveal" style="--d:.62s">
-          <div class="clabel">− Delivery <span class="ctag">per order</span></div>
-          <div class="ctrack"><div class="cfill cost" style="--w:2.6%;--bd:1s"></div></div>
-          <div class="cval">−22</div>
-        </div>
-        <div class="crow reveal" style="--d:.72s">
-          <div class="clabel">− Payments <span class="ctag">1.8%</span></div>
-          <div class="ctrack"><div class="cfill cost" style="--w:1.8%;--bd:1.15s"></div></div>
-          <div class="cval">−15</div>
-        </div>
-        <div class="crow totalrow reveal" style="--d:.86s">
-          <div class="clabel">Contribution margin<span class="cmchip">76%</span></div>
-          <div class="ctrack"><div class="cfill cm" style="--w:76%;--bd:1.35s"></div></div>
-          <div class="cval">Rs.<span data-target="644">0</span></div>
+        <div class="mtrack">
+          <div class="mcost"><span>costs</span><b>−Rs.203</b><span>ingredients, packaging, delivery, fees</span></div>
+          <div class="mmargin">
+            <div class="mfill"></div>
+            <div class="mleaks">
+              <div class="leak" style="left:24%"><span>billing errors</span></div>
+              <div class="leak" style="left:50%"><span>missed orders</span></div>
+              <div class="leak" style="left:76%"><span>no data</span></div>
+            </div>
+            <div class="mlbl">
+              <div class="lbl-now"><span class="big">Rs.644 kept</span><div style="font-size:.66em;opacity:.92">76% margin</div></div>
+              <div class="lbl-before"><span class="big" style="color:#fca5a5">leaks away</span><div style="font-size:.6em;color:#fca5a5">and you can't even measure it</div></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="bestrip reveal" style="--d:1.5s">Each order clears <b>Rs.644</b>, so just <span class="hl">11 orders a day</span> covers all fixed costs — we plan for <b>47/day</b>, about <span class="hl">4.3× break-even</span>.</div>
-      <div class="bemath reveal" style="--d:1.62s">Rs.2,02,910 monthly fixed cost ÷ Rs.644 = 315 orders/month ≈ 11/day</div>
+      <div class="mcap reveal" style="--d:.55s">
+        <div class="cap-now">Each order clears <b>Rs.644</b> — so just <span class="hl">11 orders a day</span> breaks even, and we plan for <b>47/day</b>, about <span class="hl">4.3×</span>.</div>
+        <div class="cap-before">Hand-written bills, missed calls at the peak, nothing recorded — <b>margin leaks at every step</b>, and there's no data to fix it.</div>
+      </div>
     </section>
 
     <!-- 5 — DASHBOARD -->
@@ -497,6 +499,16 @@
   const dots = Array.from(dotsWrap.children);
   const pad = n => String(n + 1).padStart(2, '0');
 
+  const econ = document.getElementById('econ');
+  let econTimer;
+  function setEcon(state) {
+    if (!econ) return;
+    econ.classList.toggle('st-before', state === 'before');
+    econ.querySelectorAll('.econ-toggle button').forEach(b => b.classList.toggle('on', b.dataset.state === state));
+  }
+  if (econ) econ.querySelectorAll('.econ-toggle button').forEach(b =>
+    b.addEventListener('click', () => { clearTimeout(econTimer); setEcon(b.dataset.state); }));
+
   function countUp(slide) {
     slide.querySelectorAll('[data-target]').forEach(el => {
       const target = parseFloat(el.dataset.target), dec = parseInt(el.dataset.dec || '0', 10);
@@ -517,6 +529,12 @@
     progress.style.width = (i / (slides.length - 1) * 100) + '%';
     prevBtn.disabled = i === 0; nextBtn.disabled = i === slides.length - 1;
     if (slides[i].hasAttribute('data-countup')) countUp(slides[i]);
+    clearTimeout(econTimer);
+    if (slides[i] === econ) {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) { setEcon('now'); }
+      else { setEcon('before'); econTimer = setTimeout(() => setEcon('now'), 1300); }
+    }
   }
   const next = () => go(i + 1), prev = () => go(i - 1);
   nextBtn.addEventListener('click', next); prevBtn.addEventListener('click', prev);

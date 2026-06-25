@@ -42,14 +42,14 @@ Pace it calm and deliberate (~140 wpm) — let the visuals carry the weight, don
 ---
 
 ### Slide 4 · The Economics — `0:51–1:13`
-*On screen: the waterfall animates as you speak the costs.*
+*On screen: the meter auto-flips from **Before** (margin leaking) to **Now** (Rs.644 kept). Tap the toggle to replay the contrast.*
 
-> And the economics already **work**. Each order brings in eight-forty-seven. Take out ingredients,
-> packaging, delivery and payments — and **six-forty-four** stays as margin. **Seventy-six percent.**
-> `(pause)` So we break even at just **eleven orders a day**. We're planning for forty-seven — more
-> than **four times** over.
+> Look at a single order. **Eight-forty-seven** in revenue. By phone, that margin leaks at every
+> step — wrong bills, missed orders. With our system, after ingredients, packaging, delivery and
+> payments, **six-forty-four** stays. **Seventy-six percent.** `(pause)` We break even at **eleven
+> orders a day**; we plan for forty-seven — more than **four times** over.
 
-*Slow down here. This is your strongest slide — let each number breathe with the bars.*
+*Slow down — your strongest slide. Let the bar fill on "stays." Optionally tap **Phone ordering** to show the leak, then **SliceMatic** to fill it back.*
 
 ---
 
