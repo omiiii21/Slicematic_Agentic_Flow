@@ -97,16 +97,19 @@
   .mcost b { color:#e7b3b3; font-size:1.35em; }
   .mmargin { width:76%; position:relative; display:grid; place-items:center; }
   .mfill { position:absolute; inset:0; background:linear-gradient(90deg,var(--red),#fb7185); opacity:1; transition:opacity 1.1s ease; }
-  .mleaks { position:absolute; inset:0; opacity:0; transition:opacity 1.1s ease; }
-  .leak { position:absolute; top:0; bottom:0; border-left:2px dashed rgba(239,68,68,.85); }
+  .mleaks { position:absolute; inset:0; }
+  .leak { position:absolute; top:0; bottom:0; border-left:2px dashed rgba(239,68,68,.85); opacity:0; }
   .leak span { position:absolute; top:7px; left:5px; font-size:clamp(9px,1vw,11px); color:#fca5a5; white-space:nowrap; }
+  .slide.st-before .leak { animation:lkIn .55s ease both; animation-delay:var(--ld,0s); }
+  @keyframes lkIn { from { opacity:0; transform:translateX(-10px); } to { opacity:1; transform:none; } }
   .mlbl { position:relative; z-index:2; text-align:center; color:#fff; font-weight:800; line-height:1.15; }
   .mlbl .big { font-size:clamp(17px,2.3vw,28px); }
   .lbl-before, .cap-before { display:none; }
   .slide.st-before .mfill { opacity:.1; }
-  .slide.st-before .mleaks { opacity:1; }
   .slide.st-before .lbl-now, .slide.st-before .cap-now { display:none; }
   .slide.st-before .lbl-before, .slide.st-before .cap-before { display:block; }
+  .slide.st-before .lbl-before { animation:lkIn .55s ease both; animation-delay:2.5s; }
+  .slide.st-before .cap-before { animation:lkIn .5s ease both; animation-delay:2.5s; }
   .mcap { margin-top:18px; font-size:clamp(13px,1.45vw,18px); line-height:1.5; }
   .mcap b { color:#fff; } .mcap .hl { color:var(--red); font-weight:800; }
   /* centered top block + Rs.644 derivation below */
@@ -124,7 +127,7 @@
   .crow .clabel .ctag { color:var(--muted); font-size:.78em; }
   .crow .ctrack { height:18px; background:rgba(255,255,255,.07); border-radius:6px; overflow:hidden; }
   .crow .cfill { height:100%; width:0; border-radius:5px; }
-  .slide.active .crow .cfill { animation:grow 1.3s cubic-bezier(.2,.7,.2,1) forwards; animation-delay:var(--bd,3s); }
+  .slide.active .crow .cfill { animation:grow 1.0s cubic-bezier(.2,.7,.2,1) forwards; animation-delay:var(--bd,3s); }
   @keyframes grow { to { width:var(--w); } }
   .cfill.rev { background:linear-gradient(90deg,#9b9ba6,#cfcfd6); }
   .cfill.cost { background:linear-gradient(90deg,#7f1d1d,#b91c1c); }
@@ -195,6 +198,7 @@
     .dbar { animation:none !important; transform:none !important; }
     .mfill,.mleaks { transition:none !important; }
     .crow .cfill { animation:none !important; width:var(--w) !important; }
+    .slide.st-before .leak, .slide.st-before .lbl-before, .slide.st-before .cap-before { animation:none !important; opacity:1 !important; transform:none !important; }
   }
   @media (max-width:860px) {
     .split { grid-template-columns:1fr; } .vis { display:none; }
@@ -348,9 +352,9 @@
           <div class="mmargin">
             <div class="mfill"></div>
             <div class="mleaks">
-              <div class="leak" style="left:24%"><span>billing errors</span></div>
-              <div class="leak" style="left:50%"><span>missed orders</span></div>
-              <div class="leak" style="left:76%"><span>no data</span></div>
+              <div class="leak" style="left:24%;--ld:.4s"><span>billing errors</span></div>
+              <div class="leak" style="left:50%;--ld:1.1s"><span>missed orders</span></div>
+              <div class="leak" style="left:76%;--ld:1.8s"><span>no data</span></div>
             </div>
             <div class="mlbl">
               <div class="lbl-now"><span class="big">Rs.644 kept</span><div style="font-size:.66em;opacity:.92">76% margin</div></div>
@@ -363,15 +367,15 @@
         <div class="cap-now">Just <span class="hl">11 orders/day</span> breaks even — we plan for <b>47</b>, about <span class="hl">4.3×</span>.</div>
         <div class="cap-before"><b>Margin leaks at every step</b> — and there's no data to fix it.</div>
       </div>
-      <div class="econ-detail reveal" style="--d:1.5s">
+      <div class="econ-detail reveal" style="--d:5.9s">
         <div class="detail-h">How that <b style="color:var(--red)">Rs.644</b> is built — per pizza</div>
         <div class="calc">
-          <div class="crow"><div class="clabel">Revenue <span class="ctag">ex-GST</span></div><div class="ctrack"><div class="cfill rev" style="--w:100%;--bd:1.7s"></div></div><div class="cval">Rs.847</div></div>
-          <div class="crow"><div class="clabel">− Ingredients</div><div class="ctrack"><div class="cfill cost" style="--w:17.5%;--bd:2.0s"></div></div><div class="cval">−148</div></div>
-          <div class="crow"><div class="clabel">− Packaging</div><div class="ctrack"><div class="cfill cost" style="--w:2.1%;--bd:2.3s"></div></div><div class="cval">−18</div></div>
-          <div class="crow"><div class="clabel">− Delivery <span class="ctag">per order</span></div><div class="ctrack"><div class="cfill cost" style="--w:2.6%;--bd:2.6s"></div></div><div class="cval">−22</div></div>
-          <div class="crow"><div class="clabel">− Payments <span class="ctag">1.8%</span></div><div class="ctrack"><div class="cfill cost" style="--w:1.8%;--bd:2.9s"></div></div><div class="cval">−15</div></div>
-          <div class="crow totalrow"><div class="clabel">Contribution margin<span class="cmchip">76%</span></div><div class="ctrack"><div class="cfill cm" style="--w:76%;--bd:3.3s"></div></div><div class="cval">Rs.644</div></div>
+          <div class="crow"><div class="clabel">Revenue <span class="ctag">ex-GST</span></div><div class="ctrack"><div class="cfill rev" style="--w:100%;--bd:6.0s"></div></div><div class="cval">Rs.847</div></div>
+          <div class="crow"><div class="clabel">− Ingredients</div><div class="ctrack"><div class="cfill cost" style="--w:17.5%;--bd:6.25s"></div></div><div class="cval">−148</div></div>
+          <div class="crow"><div class="clabel">− Packaging</div><div class="ctrack"><div class="cfill cost" style="--w:2.1%;--bd:6.5s"></div></div><div class="cval">−18</div></div>
+          <div class="crow"><div class="clabel">− Delivery <span class="ctag">per order</span></div><div class="ctrack"><div class="cfill cost" style="--w:2.6%;--bd:6.75s"></div></div><div class="cval">−22</div></div>
+          <div class="crow"><div class="clabel">− Payments <span class="ctag">1.8%</span></div><div class="ctrack"><div class="cfill cost" style="--w:1.8%;--bd:7.0s"></div></div><div class="cval">−15</div></div>
+          <div class="crow totalrow"><div class="clabel">Contribution margin<span class="cmchip">76%</span></div><div class="ctrack"><div class="cfill cm" style="--w:76%;--bd:7.3s"></div></div><div class="cval">Rs.644</div></div>
         </div>
       </div>
     </section>
@@ -569,7 +573,7 @@
     if (slides[i] === econ) {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduce) { setEcon('now'); }
-      else { setEcon('before'); econTimer = setTimeout(() => setEcon('now'), 2000); }
+      else { setEcon('before'); econTimer = setTimeout(() => setEcon('now'), 4800); }
     }
   }
   const next = () => go(i + 1), prev = () => go(i - 1);
