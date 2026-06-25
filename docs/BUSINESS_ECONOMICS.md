@@ -212,6 +212,13 @@ pizza order** (CM ~Rs.241), partly because delivery is shared across the basket.
 5 anyway**. Recommendation: keep it, but consider 7–8% or a minimum-order-value gate, and
 measure incremental basket lift (Q6 metric #3).
 
+**Mechanism, not just rate.** Auto-applying treats the discount as a reward for crossing the line,
+not an incentive to cross it. A nudge at qty 3–4 — "Add one more: order 5+ and save 10%" — actively
+recruits the smaller baskets the discount is meant to grow. Three layers, each distinct: the **nudge**
+lifts the right orders, the **MOV gate** blocks 10% on low-value baskets, and the **RFM measurement**
+(Q6 #3) checks whether it actually moves people. It can't fix the giveaway to customers who always
+wanted 5 — no rule reads intent — but it raises the discount's conversion efficiency.
+
 ### Q5 — If COGS rises 12%, how many extra daily orders to hold EBITDA flat?
 
 Ingredient COGS 148 → 165.76 (+17.76/order); CM 644 → **626.24**. To hold EBITDA at ~Rs.7.0L:
