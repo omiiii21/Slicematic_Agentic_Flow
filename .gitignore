@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# Node / Next.js (Stage 3)
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# Secrets & env — NEVER commit OpenRouter / Supabase keys
+.env
+.env.local
+.env*.local
+*.key
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Gradio runtime
+*.log
+flagged/
+
+# Keep the SAMPLE orders_log.txt (it's a required deliverable), but ignore
+# any locally generated ones if you rename them:
+orders_log.local.txt
