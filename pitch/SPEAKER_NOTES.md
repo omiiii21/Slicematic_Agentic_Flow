@@ -1,4 +1,4 @@
-# SliceMatic — 2-Minute Pitch Script
+# SliceMatic 2-Minute Pitch Script
 
 Speaker notes for [`pitch/index.html`](index.html). **Target: 2:00 · ~280 words.**
 Pace it calm and deliberate (~140 wpm) — let the visuals carry the weight, don't race.
