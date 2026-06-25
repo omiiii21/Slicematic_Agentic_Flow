@@ -32,7 +32,7 @@ technical spec (`SPEC.md`) and the test suite.
 - FR-3.1 Load `Types_of_Base.txt`, `Types_of_Pizza.txt`, `Types_of_Toppings.txt` at startup. **No hardcoded menu.**
 - FR-3.2 Display each menu as a numbered list with name + INR price.
 - FR-3.3 Accept selection **by item number only**; reject out-of-range numbers, letters, and empty input.
-- FR-3.4 Customer composes one pizza = one **base** + one **pizza** + one **topping**.
+- FR-3.4 Customer composes one pizza = one **base** + one **pizza variety** + one **topping**.
 
 ### FR-4 Pricing engine
 - FR-4.1 Per-unit price = base + pizza + topping.
@@ -80,7 +80,7 @@ flowchart TD
     A([Launch app]) --> B[Step 1: Enter name + phone]
     B --> C{Valid name & phone?}
     C -- No --> B
-    C -- Yes --> D[Step 2: Enter quantity 1-10]
+    C -- Yes --> D[Step 2: Enter quantity 1-10<br/>applies to one composition]
     D --> E{Valid integer in range?}
     E -- No --> D
     E -- Yes --> F[qty >= 5 ? flag 10% discount]
@@ -124,8 +124,11 @@ This system, **exactly as specified**, has real limits:
    settlement, no idempotency, no refunds.
 5. **No authentication / abuse protection.** Anyone can place orders; no OTP on the phone
    number, no rate limiting, no fraud checks.
-6. **Discount logic is shallow.** A blanket 10% at qty ≥ 5 with no minimum order value or
-   per-customer cap is exploitable and may erode margin (see `BUSINESS_ECONOMICS.md`, Q4).
+6. **Discount logic is shallow.** A blanket 10% at qty ≥ 5 auto-applies silently, so it cannot
+   convert the customers it targets (those who'd order 3–4) and pays out in full to customers who
+   would have bought 5 regardless - margin spent without changing behaviour, not an exploit but a
+   leak. With no minimum-order-value gate it also discounts low-value baskets. Fix: surface it as
+   an upsell nudge at qty 3–4, add an MOV gate, and measure lift (see `BUSINESS_ECONOMICS.md`, Q4).
 7. **GST is single-rate, delivery-only.** Hardcoded 18% ignores the 5% dine-in case and any
    ITC accounting — fine for delivery, wrong if the model expands.
 8. **Single-session, no resumption.** If the browser closes mid-flow, the order is lost.
