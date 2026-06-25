@@ -113,12 +113,12 @@
   #econ { text-align:center; }
   #econ h2 { max-width:none; }
   .econ-toggle { margin-left:auto; margin-right:auto; }
-  .meter { max-width:1040px; margin-left:auto; margin-right:auto; }
-  .mcap { text-align:center; max-width:70ch; margin-left:auto; margin-right:auto; }
-  .econ-detail { max-width:1040px; margin:16px auto 0; }
+  .meter { width:min(1120px,100%); max-width:none; align-self:center; }
+  .mcap { text-align:center; max-width:70ch; align-self:center; }
+  .econ-detail { width:min(1120px,100%); align-self:center; margin-top:16px; }
   .detail-h { color:var(--muted); font-size:clamp(11px,1.2vw,14px); letter-spacing:.4px; margin-bottom:10px; }
   .detail-h b { color:#fff; }
-  .calc { display:grid; gap:8px; }
+  .calc { display:flex; flex-direction:column; gap:10px; }
   .crow { display:grid; grid-template-columns:190px 1fr 90px; align-items:center; gap:18px; font-size:clamp(12px,1.25vw,16px); }
   .crow .clabel { color:#d7d7de; text-align:left; }
   .crow .clabel .ctag { color:var(--muted); font-size:.78em; }
@@ -344,7 +344,7 @@
           <span class="cap-before" style="color:#fca5a5">what leaks away &rarr;</span>
         </div>
         <div class="mtrack">
-          <div class="mcost"><span>costs</span><b>−Rs.203</b><span>ingredients, packaging, delivery, fees</span></div>
+          <div class="mcost"><span>costs</span><b>−Rs.203</b></div>
           <div class="mmargin">
             <div class="mfill"></div>
             <div class="mleaks">
