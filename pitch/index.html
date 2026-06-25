@@ -23,22 +23,18 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* progress bar */
   .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--red);
               width: 0; transition: width .5s cubic-bezier(.2,.7,.2,1); z-index: 20; box-shadow: 0 0 12px var(--red); }
-
-  /* fixed chrome */
   .brand { position: fixed; top: 26px; left: 34px; font-weight: 800; letter-spacing: -.5px;
            font-size: 19px; z-index: 15; }
   .brand b { color: var(--red); }
   .counter { position: fixed; top: 28px; right: 34px; font-variant-numeric: tabular-nums;
              color: var(--muted); font-size: 14px; letter-spacing: 2px; z-index: 15; }
 
-  /* slide stage */
   .stage { position: relative; height: 100vh; width: 100vw; }
   .slide {
     position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center;
-    padding: clamp(72px, 10vh, 108px) clamp(40px, 9vw, 130px) clamp(84px, 11vh, 118px);
+    padding: clamp(72px, 10vh, 108px) clamp(40px, 9vw, 120px) clamp(84px, 11vh, 118px);
     opacity: 0; visibility: hidden;
     transform: scale(.99); transition: opacity .5s ease, transform .5s ease, visibility .5s;
     z-index: 1;
@@ -47,50 +43,92 @@
 
   .kicker { color: var(--red); font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
             font-size: clamp(12px, 1.1vw, 15px); margin-bottom: 18px; }
-  h1 { font-size: clamp(34px, 5.6vw, 78px); font-weight: 800; line-height: 1.03; letter-spacing: -1.5px;
-       max-width: 16ch; }
-  h2 { font-size: clamp(28px, 4.4vw, 60px); font-weight: 800; line-height: 1.08; letter-spacing: -1px;
-       max-width: 17ch; }
-  .lead { color: var(--muted); font-size: clamp(16px, 1.7vw, 24px); margin-top: 22px; max-width: 42ch;
+  h1 { font-size: clamp(32px, 5.2vw, 72px); font-weight: 800; line-height: 1.04; letter-spacing: -1.5px;
+       max-width: 15ch; }
+  h2 { font-size: clamp(26px, 4.2vw, 56px); font-weight: 800; line-height: 1.08; letter-spacing: -1px;
+       max-width: 18ch; }
+  .lead { color: var(--muted); font-size: clamp(15px, 1.6vw, 22px); margin-top: 22px; max-width: 40ch;
           line-height: 1.5; }
 
-  ul.points { list-style: none; margin-top: 34px; display: grid; gap: 16px; max-width: 50ch; }
-  ul.points li { position: relative; padding-left: 30px; font-size: clamp(15px, 1.55vw, 21px);
-                 line-height: 1.45; color: #e7e7ee; }
-  ul.points li::before { content: ""; position: absolute; left: 0; top: .55em; width: 11px; height: 11px;
-                         border-radius: 3px; background: var(--red); box-shadow: 0 0 10px rgba(239,68,68,.6); }
+  ul.points { list-style: none; margin-top: 30px; display: grid; gap: 18px; max-width: 52ch; }
+  ul.points li { position: relative; display: flex; gap: 16px; align-items: flex-start;
+                 font-size: clamp(15px, 1.5vw, 20px); line-height: 1.45; color: #e7e7ee; }
   ul.points li b { color: #fff; }
+  .picon { flex: none; width: 36px; height: 36px; color: var(--red); margin-top: 1px;
+           background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.32); border-radius: 9px; padding: 6px; }
 
-  .chip { display: inline-flex; align-items: center; gap: 10px; margin-top: 34px; padding: 12px 18px;
+  .chip { display: inline-flex; align-items: center; gap: 10px; margin-top: 32px; padding: 12px 18px;
           background: rgba(239,68,68,.10); border: 1px solid rgba(239,68,68,.35); border-radius: 999px;
           color: #ffd9d9; font-size: clamp(13px,1.3vw,17px); }
   .chip .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--red); }
 
+  .ic { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* two-column split */
+  .split { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px, 4.5vw, 70px); align-items: center; }
+  .split .vis { display: flex; align-items: center; justify-content: center; }
+
+  /* phone mockup */
+  .phone { width: clamp(210px, 21vw, 290px); filter: drop-shadow(0 34px 70px rgba(0,0,0,.55));
+           animation: float 5.5s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+  .ping { transform-box: fill-box; transform-origin: center; animation: ping 2.6s ease-out infinite; }
+  .ping.b { animation-delay: 1.3s; }
+  @keyframes ping { 0% { transform: scale(.55); opacity: .65; } 100% { transform: scale(1.7); opacity: 0; } }
+  .team { margin-top: 30px; color: var(--muted); font-size: clamp(13px,1.3vw,16px); letter-spacing: .3px; }
+
+  /* pipeline infographic */
+  .pipe { display: flex; align-items: flex-start; margin-top: 42px; max-width: 1020px; }
+  .pnode { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .pnode .circle { width: clamp(58px, 6vw, 82px); height: clamp(58px, 6vw, 82px); border-radius: 50%;
+                   display: grid; place-items: center; color: var(--red);
+                   background: rgba(239,68,68,.10); border: 1.5px solid rgba(239,68,68,.45); }
+  .pnode .circle svg { width: 46%; height: 46%; }
+  .pnode .circle.strong { background: var(--red); color: #fff; border-color: var(--red);
+                          box-shadow: 0 0 34px rgba(239,68,68,.55); }
+  .pnode .pl { margin-top: 15px; font-weight: 700; font-size: clamp(13px,1.4vw,18px); }
+  .pnode .ps { color: var(--muted); font-size: clamp(11px,1.15vw,13.5px); margin-top: 5px; max-width: 17ch; line-height: 1.4; }
+  .pconn { flex: 0 0 auto; align-self: flex-start; margin-top: clamp(26px, 3vw, 38px);
+           color: rgba(239,68,68,.55); }
+  .pcap { margin-top: 30px; color: var(--muted); font-size: clamp(14px,1.4vw,18px); }
+  .pcap b { color: #fff; }
+
   /* stat grid */
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 4vw, 64px);
-           margin-top: 44px; max-width: 1000px; }
-  .stat .num { font-size: clamp(40px, 6.5vw, 92px); font-weight: 800; letter-spacing: -2px;
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 4vw, 60px);
+           margin-top: 36px; max-width: 980px; }
+  .stat .num { font-size: clamp(38px, 6vw, 84px); font-weight: 800; letter-spacing: -2px;
                line-height: 1; color: #fff; }
   .stat .num .unit { color: var(--red); }
-  .stat .lbl { color: var(--muted); margin-top: 12px; font-size: clamp(13px,1.35vw,18px); line-height: 1.4; }
+  .stat .lbl { color: var(--muted); margin-top: 12px; font-size: clamp(12px,1.3vw,17px); line-height: 1.4; }
 
-  /* roadmap timeline */
-  .road { display: flex; gap: 0; margin-top: 32px; max-width: 1050px; }
+  /* bar comparison */
+  .bars { margin-top: 34px; max-width: 640px; display: grid; gap: 16px; }
+  .bar .bl { display: flex; justify-content: space-between; font-size: clamp(13px,1.3vw,16px); margin-bottom: 7px; color: #d7d7de; }
+  .bar .bl .bv { color: #fff; font-weight: 700; }
+  .bar .track { height: 15px; background: rgba(255,255,255,.07); border-radius: 8px; overflow: hidden; }
+  .bar .fill { height: 100%; width: 0; border-radius: 8px; }
+  .bar .fill.lo { background: linear-gradient(90deg, #6f1d1d, #b91c1c); }
+  .bar .fill.hi { background: linear-gradient(90deg, var(--red), #fb7185); box-shadow: 0 0 18px rgba(239,68,68,.5); }
+  .slide.active .bar .fill { animation: grow 1.15s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: .55s; }
+  @keyframes grow { to { width: var(--w); } }
+  .barcap { margin-top: 20px; color: var(--muted); font-size: clamp(13px,1.35vw,18px); max-width: 46ch; line-height: 1.5; }
+  .barcap b { color: #fff; }
+
+  /* roadmap */
+  .road { display: flex; gap: 0; margin-top: 30px; max-width: 1050px; }
   .road .step { flex: 1; position: relative; padding-right: 22px; }
+  .road .step .si { width: 25px; height: 25px; color: var(--red); margin-bottom: 12px; }
   .road .step .mk { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-  .road .step .ring { width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--red);
+  .road .step .ring { width: 15px; height: 15px; border-radius: 50%; border: 3px solid var(--red);
                       background: var(--bg0); flex: none; }
-  .road .step .bar { height: 3px; flex: 1; background: linear-gradient(90deg, var(--red), rgba(239,68,68,.15)); }
+  .road .step .bar2 { height: 3px; flex: 1; background: linear-gradient(90deg, var(--red), rgba(239,68,68,.15)); }
   .road .step.done .ring { background: var(--red); }
   .road .step .t { font-weight: 800; font-size: clamp(15px,1.5vw,20px); }
   .road .step .d { color: var(--muted); font-size: clamp(12px,1.25vw,15px); margin-top: 6px; line-height: 1.4; }
 
   .closing { font-size: clamp(19px, 2.5vw, 34px); font-weight: 800; letter-spacing: -.6px; line-height: 1.18;
-             max-width: 34ch; margin-top: 24px; }
+             max-width: 34ch; margin-top: 26px; }
   .closing em { color: var(--red); font-style: normal; }
-
-  .team { position: absolute; bottom: clamp(36px,7vw,90px); left: clamp(40px,9vw,130px);
-          color: var(--muted); font-size: clamp(13px,1.3vw,16px); letter-spacing: .3px; }
 
   /* nav */
   .nav { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%); display: flex;
@@ -106,15 +144,17 @@
   .dots i.on { background: var(--red); transform: scale(1.25); box-shadow: 0 0 10px var(--red); }
   .hint { position: fixed; bottom: 30px; right: 30px; color: rgba(255,255,255,.35); font-size: 12px; z-index: 14; }
 
-  /* reveal animation */
   .reveal { opacity: 0; transform: translateY(22px); }
   .slide.active .reveal { animation: reveal .72s cubic-bezier(.2,.75,.25,1) forwards; animation-delay: var(--d, 0s); }
   @keyframes reveal { to { opacity: 1; transform: none; } }
 
-  @media (max-width: 720px) {
-    .stats { grid-template-columns: 1fr; gap: 24px; }
-    .road { flex-direction: column; gap: 20px; }
-    .road .step .bar { display: none; }
+  @media (max-width: 820px) {
+    .split { grid-template-columns: 1fr; }
+    .split .vis { display: none; }
+    .stats { grid-template-columns: 1fr; gap: 22px; }
+    .pipe, .road { flex-direction: column; gap: 18px; }
+    .pconn { display: none; }
+    .road .step .bar2 { display: none; }
   }
 </style>
 </head>
@@ -126,12 +166,43 @@
   <div class="stage" id="stage">
 
     <!-- 1 — HOOK -->
-    <section class="slide" data-bg>
-      <div class="kicker reveal" style="--d:.05s">Executive Brief</div>
-      <h1 class="reveal" style="--d:.15s">From phone calls to a shop that runs on&nbsp;data.</h1>
-      <p class="lead reveal" style="--d:.35s">Same kitchen. Same riders. A smarter way to take every single order —
-        and to learn from it.</p>
-      <div class="team reveal" style="--d:.6s">Om &middot; Febin &middot; Alok &middot; Guru &middot; Rahul</div>
+    <section class="slide">
+      <div class="split">
+        <div class="col-text">
+          <div class="kicker reveal" style="--d:.05s">Executive Brief</div>
+          <h1 class="reveal" style="--d:.15s">From phone calls to a shop that runs on&nbsp;data.</h1>
+          <p class="lead reveal" style="--d:.35s">Same kitchen. Same riders. A smarter way to take every order — and to learn from it.</p>
+          <div class="team reveal" style="--d:.55s">Om &middot; Febin &middot; Alok &middot; Guru &middot; Rahul</div>
+        </div>
+        <div class="vis reveal" style="--d:.4s">
+          <svg class="phone" viewBox="0 0 300 470" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="8" width="260" height="454" rx="42" fill="#1b1b22" stroke="rgba(255,255,255,.09)"/>
+            <rect x="34" y="26" width="232" height="418" rx="26" fill="#0f0f14"/>
+            <rect x="120" y="38" width="60" height="8" rx="4" fill="#26262e"/>
+            <!-- header -->
+            <text x="150" y="86" text-anchor="middle" fill="#fff" font-family="Segoe UI,Arial" font-size="19" font-weight="700">SliceMatic</text>
+            <rect x="124" y="96" width="52" height="3" rx="1.5" fill="#ef4444"/>
+            <!-- customer bubble -->
+            <rect x="86" y="120" width="154" height="62" rx="16" fill="#ef4444"/>
+            <text x="163" y="146" text-anchor="middle" fill="#fff" font-family="Segoe UI,Arial" font-size="12.5" font-weight="600">2× BBQ Chicken,</text>
+            <text x="163" y="165" text-anchor="middle" fill="#ffe2e2" font-family="Segoe UI,Arial" font-size="12.5">extra cheese</text>
+            <!-- bill card -->
+            <rect x="58" y="204" width="184" height="104" rx="16" fill="#17171d" stroke="rgba(255,255,255,.08)"/>
+            <text x="74" y="232" fill="#8a8a96" font-family="Segoe UI,Arial" font-size="11" letter-spacing="1.5">ORDER TOTAL</text>
+            <text x="74" y="268" fill="#fff" font-family="Segoe UI,Arial" font-size="27" font-weight="800">Rs.3,594.87</text>
+            <text x="74" y="291" fill="#7ddf9c" font-family="Segoe UI,Arial" font-size="11">10% bulk discount + 18% GST applied</text>
+            <!-- mic with pulse -->
+            <circle class="ping" cx="150" cy="384" r="30" fill="none" stroke="#ef4444" stroke-width="2"/>
+            <circle class="ping b" cx="150" cy="384" r="30" fill="none" stroke="#ef4444" stroke-width="2"/>
+            <circle cx="150" cy="384" r="27" fill="#ef4444"/>
+            <g stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round">
+              <rect x="144" y="370" width="12" height="20" rx="6" fill="#fff" stroke="none"/>
+              <path d="M138 384a12 12 0 0 0 24 0"/>
+              <line x1="150" y1="396" x2="150" y2="402"/>
+            </g>
+          </svg>
+        </div>
+      </div>
     </section>
 
     <!-- 2 — PROBLEM -->
@@ -139,23 +210,48 @@
       <div class="kicker reveal" style="--d:.05s">The Problem</div>
       <h2 class="reveal" style="--d:.15s">Today, every order rides on a phone call.</h2>
       <ul class="points">
-        <li class="reveal" style="--d:.32s"><b>Taken by hand</b> — busy evenings mean missed calls and the wrong pizza at the door.</li>
-        <li class="reveal" style="--d:.46s"><b>Maths in someone's head</b> — prices, the bulk discount, 18% GST. Slips become refunds and arguments.</li>
-        <li class="reveal" style="--d:.60s"><b>Nothing is recorded</b> — no record of what sold or to whom, so you plan on memory, not numbers.</li>
+        <li class="reveal" style="--d:.32s">
+          <svg class="picon ic" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span><b>Taken by hand</b> — busy evenings mean missed calls and the wrong pizza at the door.</span>
+        </li>
+        <li class="reveal" style="--d:.46s">
+          <svg class="picon ic" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8" y2="11"/><line x1="12" y1="11" x2="12" y2="11"/><line x1="16" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="8" y2="15"/><line x1="12" y1="15" x2="12" y2="15"/><line x1="16" y1="15" x2="16" y2="18"/></svg>
+          <span><b>Maths in someone's head</b> — prices, the bulk discount, 18% GST. Slips become refunds and arguments.</span>
+        </li>
+        <li class="reveal" style="--d:.60s">
+          <svg class="picon ic" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><line x1="3.5" y1="3.5" x2="20.5" y2="20.5"/></svg>
+          <span><b>Nothing is recorded</b> — no record of what sold or to whom, so you plan on memory, not numbers.</span>
+        </li>
       </ul>
       <div class="chip reveal" style="--d:.78s"><span class="dot"></span> ≈ 60–90 staff-minutes lost every day to manual order-taking</div>
     </section>
 
-    <!-- 3 — SOLUTION -->
+    <!-- 3 — SOLUTION (pipeline infographic) -->
     <section class="slide">
       <div class="kicker reveal" style="--d:.05s">The Solution</div>
       <h2 class="reveal" style="--d:.15s">One guided order, always correct.</h2>
-      <ul class="points">
-        <li class="reveal" style="--d:.32s"><b>Every input checked, every rupee computed in code</b> — the 10% bulk discount and 18% GST, never guessed.</li>
-        <li class="reveal" style="--d:.46s"><b>Order in plain language, soon by voice</b> — the AI listens and understands; the code does all the money.</li>
-        <li class="reveal" style="--d:.60s"><b>Every order logged</b> — the data asset that powers menu, pricing, and forecasting decisions.</li>
-      </ul>
-      <div class="chip reveal" style="--d:.78s"><span class="dot"></span> Billing verified to the paisa — reference order = Rs.&nbsp;3,594.87</div>
+      <div class="pipe">
+        <div class="pnode reveal" style="--d:.30s">
+          <div class="circle"><svg class="ic" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="pl">You order</div><div class="ps">in plain language, soon by voice</div>
+        </div>
+        <svg class="pconn ic" width="56" height="24" viewBox="0 0 56 24"><line x1="2" y1="12" x2="48" y2="12"/><polyline points="42,6 50,12 42,18"/></svg>
+        <div class="pnode reveal" style="--d:.44s">
+          <div class="circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.2L20.5 10l-6.3 2.1L12 18l-2.2-5.9L3.5 10l6.3-1.8z"/></svg></div>
+          <div class="pl">AI extracts</div><div class="ps">name, qty, base, pizza, topping</div>
+        </div>
+        <svg class="pconn ic" width="56" height="24" viewBox="0 0 56 24"><line x1="2" y1="12" x2="48" y2="12"/><polyline points="42,6 50,12 42,18"/></svg>
+        <div class="pnode reveal" style="--d:.58s">
+          <div class="circle strong"><svg class="ic" viewBox="0 0 24 24" style="stroke:#fff"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div class="pl">Code prices it</div><div class="ps">validation, discount, GST — never the AI</div>
+        </div>
+        <svg class="pconn ic" width="56" height="24" viewBox="0 0 56 24"><line x1="2" y1="12" x2="48" y2="12"/><polyline points="42,6 50,12 42,18"/></svg>
+        <div class="pnode reveal" style="--d:.72s">
+          <div class="circle"><svg class="ic" viewBox="0 0 24 24"><path d="M6 2h12v20l-2.5-1.6-2.5 1.6-2.5-1.6L8 22l-2-1.5z"/><line x1="9.5" y1="8" x2="14.5" y2="8"/><line x1="9.5" y1="12" x2="14.5" y2="12"/></svg></div>
+          <div class="pl">Bill + logged</div><div class="ps">correct to the paisa, saved for analytics</div>
+        </div>
+      </div>
+      <div class="pcap reveal" style="--d:.9s"><b>The AI listens. The code does the money.</b> &nbsp;Reference order verified = Rs. 3,594.87.</div>
     </section>
 
     <!-- 4 — ECONOMICS -->
@@ -163,21 +259,30 @@
       <div class="kicker reveal" style="--d:.05s">The Economics</div>
       <h2 class="reveal" style="--d:.15s">The unit economics already work.</h2>
       <div class="stats">
-        <div class="stat reveal" style="--d:.34s">
+        <div class="stat reveal" style="--d:.32s">
           <div class="num">Rs.<span data-target="644">0</span></div>
           <div class="lbl">Contribution margin per order &mdash; 76% of revenue</div>
         </div>
-        <div class="stat reveal" style="--d:.5s">
+        <div class="stat reveal" style="--d:.46s">
           <div class="num"><span data-target="11">0</span><span class="unit">/day</span></div>
           <div class="lbl">Orders to break even on monthly fixed cost</div>
         </div>
-        <div class="stat reveal" style="--d:.66s">
+        <div class="stat reveal" style="--d:.60s">
           <div class="num"><span data-target="4.3" data-dec="1">0</span><span class="unit">×</span></div>
           <div class="lbl">Above break-even at the launch-volume plan</div>
         </div>
       </div>
-      <p class="lead reveal" style="--d:.85s">Correct billing protects the margin. The order data drives menu engineering,
-        demand forecasting, and customer retention.</p>
+      <div class="bars">
+        <div class="bar reveal" style="--d:.74s">
+          <div class="bl"><span>Break-even</span><span class="bv">11 / day</span></div>
+          <div class="track"><div class="fill lo" style="--w:23%"></div></div>
+        </div>
+        <div class="bar reveal" style="--d:.84s">
+          <div class="bl"><span>Launch-volume plan</span><span class="bv">47 / day</span></div>
+          <div class="track"><div class="fill hi" style="--w:100%"></div></div>
+        </div>
+      </div>
+      <div class="barcap reveal" style="--d:.96s">Correct billing protects the margin; the order data powers <b>menu engineering, demand forecasting, and retention</b>.</div>
     </section>
 
     <!-- 5 — VISION -->
@@ -185,23 +290,26 @@
       <div class="kicker reveal" style="--d:.05s">The Vision</div>
       <h2 class="reveal" style="--d:.13s">From prototype to a live, AI-powered product.</h2>
       <div class="road">
-        <div class="step done reveal" style="--d:.34s">
-          <div class="mk"><span class="ring"></span><span class="bar"></span></div>
+        <div class="step done reveal" style="--d:.32s">
+          <svg class="si ic" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <div class="mk"><span class="ring"></span><span class="bar2"></span></div>
           <div class="t">Design</div>
           <div class="d">PRD &amp; unit economics — the business, on paper.</div>
         </div>
-        <div class="step done reveal" style="--d:.48s">
-          <div class="mk"><span class="ring"></span><span class="bar"></span></div>
+        <div class="step done reveal" style="--d:.46s">
+          <svg class="si ic" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.3-.3-.3-2.3z"/></svg>
+          <div class="mk"><span class="ring"></span><span class="bar2"></span></div>
           <div class="t">Prototype</div>
           <div class="d">Working ordering MVP — validated, GST-correct, logged.</div>
         </div>
-        <div class="step reveal" style="--d:.62s">
-          <div class="mk"><span class="ring"></span><span class="bar"></span></div>
+        <div class="step reveal" style="--d:.60s">
+          <svg class="si ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <div class="mk"><span class="ring"></span><span class="bar2"></span></div>
           <div class="t">Production</div>
           <div class="d">Live web app + database + the conversational &amp; voice agent.</div>
         </div>
       </div>
-      <div class="closing reveal" style="--d:.85s">SliceMatic started on the phone.<br>We're giving it back its <em>voice</em> — automated, accurate, and always learning.</div>
+      <div class="closing reveal" style="--d:.82s">SliceMatic started on the phone.<br>We're giving it back its <em>voice</em> — automated, accurate, and always learning.</div>
     </section>
 
   </div>
@@ -228,8 +336,7 @@
     dotsWrap.appendChild(d);
   });
   const dots = Array.from(dotsWrap.children);
-
-  function pad(n) { return String(n + 1).padStart(2, '0'); }
+  const pad = n => String(n + 1).padStart(2, '0');
 
   function countUp(slide) {
     slide.querySelectorAll('[data-target]').forEach(el => {
@@ -240,8 +347,7 @@
         const p = Math.min(1, (now - t0) / dur);
         const eased = 1 - Math.pow(1 - p, 3);
         el.textContent = (target * eased).toFixed(dec);
-        if (p < 1) requestAnimationFrame(tick);
-        else el.textContent = target.toFixed(dec);
+        if (p < 1) requestAnimationFrame(tick); else el.textContent = target.toFixed(dec);
       }
       el.textContent = (0).toFixed(dec);
       requestAnimationFrame(tick);
@@ -253,14 +359,12 @@
     slides.forEach((s, k) => s.classList.toggle('active', k === i));
     dots.forEach((d, k) => d.classList.toggle('on', k === i));
     counter.textContent = pad(i) + ' / ' + pad(slides.length - 1);
-    progress.style.width = ((i) / (slides.length - 1) * 100) + '%';
+    progress.style.width = (i / (slides.length - 1) * 100) + '%';
     prevBtn.disabled = i === 0;
     nextBtn.disabled = i === slides.length - 1;
     if (slides[i].hasAttribute('data-countup')) countUp(slides[i]);
   }
-
-  function next() { go(i + 1); }
-  function prev() { go(i - 1); }
+  const next = () => go(i + 1), prev = () => go(i - 1);
 
   nextBtn.addEventListener('click', next);
   prevBtn.addEventListener('click', prev);
@@ -270,7 +374,6 @@
     else if (e.key === 'Home') go(0);
     else if (e.key === 'End') go(slides.length - 1);
   });
-
   go(0);
 </script>
 </body>
