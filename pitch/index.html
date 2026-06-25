@@ -113,16 +113,16 @@
   #econ { text-align:center; }
   #econ h2 { max-width:none; }
   .econ-toggle { margin-left:auto; margin-right:auto; }
-  .meter { max-width:800px; margin-left:auto; margin-right:auto; }
-  .mcap { text-align:center; max-width:62ch; margin-left:auto; margin-right:auto; }
-  .econ-detail { max-width:800px; margin:16px auto 0; }
+  .meter { max-width:1040px; margin-left:auto; margin-right:auto; }
+  .mcap { text-align:center; max-width:70ch; margin-left:auto; margin-right:auto; }
+  .econ-detail { max-width:1040px; margin:16px auto 0; }
   .detail-h { color:var(--muted); font-size:clamp(11px,1.2vw,14px); letter-spacing:.4px; margin-bottom:10px; }
   .detail-h b { color:#fff; }
   .calc { display:grid; gap:8px; }
-  .crow { display:grid; grid-template-columns:150px 1fr 78px; align-items:center; gap:14px; font-size:clamp(11px,1.2vw,15px); }
+  .crow { display:grid; grid-template-columns:190px 1fr 90px; align-items:center; gap:18px; font-size:clamp(12px,1.25vw,16px); }
   .crow .clabel { color:#d7d7de; text-align:left; }
   .crow .clabel .ctag { color:var(--muted); font-size:.78em; }
-  .crow .ctrack { height:14px; background:rgba(255,255,255,.05); border-radius:5px; overflow:hidden; }
+  .crow .ctrack { height:18px; background:rgba(255,255,255,.07); border-radius:6px; overflow:hidden; }
   .crow .cfill { height:100%; width:0; border-radius:5px; }
   .slide.active .crow .cfill { animation:grow 1.3s cubic-bezier(.2,.7,.2,1) forwards; animation-delay:var(--bd,3s); }
   @keyframes grow { to { width:var(--w); } }
@@ -363,15 +363,15 @@
         <div class="cap-now">Just <span class="hl">11 orders/day</span> breaks even — we plan for <b>47</b>, about <span class="hl">4.3×</span>.</div>
         <div class="cap-before"><b>Margin leaks at every step</b> — and there's no data to fix it.</div>
       </div>
-      <div class="econ-detail reveal" style="--d:2.6s">
+      <div class="econ-detail reveal" style="--d:1.5s">
         <div class="detail-h">How that <b style="color:var(--red)">Rs.644</b> is built — per pizza</div>
         <div class="calc">
-          <div class="crow"><div class="clabel">Revenue <span class="ctag">ex-GST</span></div><div class="ctrack"><div class="cfill rev" style="--w:100%;--bd:2.9s"></div></div><div class="cval">Rs.847</div></div>
-          <div class="crow"><div class="clabel">− Ingredients</div><div class="ctrack"><div class="cfill cost" style="--w:17.5%;--bd:3.3s"></div></div><div class="cval">−148</div></div>
-          <div class="crow"><div class="clabel">− Packaging</div><div class="ctrack"><div class="cfill cost" style="--w:2.1%;--bd:3.7s"></div></div><div class="cval">−18</div></div>
-          <div class="crow"><div class="clabel">− Delivery <span class="ctag">per order</span></div><div class="ctrack"><div class="cfill cost" style="--w:2.6%;--bd:4.1s"></div></div><div class="cval">−22</div></div>
-          <div class="crow"><div class="clabel">− Payments <span class="ctag">1.8%</span></div><div class="ctrack"><div class="cfill cost" style="--w:1.8%;--bd:4.5s"></div></div><div class="cval">−15</div></div>
-          <div class="crow totalrow"><div class="clabel">Contribution margin<span class="cmchip">76%</span></div><div class="ctrack"><div class="cfill cm" style="--w:76%;--bd:5s"></div></div><div class="cval">Rs.644</div></div>
+          <div class="crow"><div class="clabel">Revenue <span class="ctag">ex-GST</span></div><div class="ctrack"><div class="cfill rev" style="--w:100%;--bd:1.7s"></div></div><div class="cval">Rs.847</div></div>
+          <div class="crow"><div class="clabel">− Ingredients</div><div class="ctrack"><div class="cfill cost" style="--w:17.5%;--bd:2.0s"></div></div><div class="cval">−148</div></div>
+          <div class="crow"><div class="clabel">− Packaging</div><div class="ctrack"><div class="cfill cost" style="--w:2.1%;--bd:2.3s"></div></div><div class="cval">−18</div></div>
+          <div class="crow"><div class="clabel">− Delivery <span class="ctag">per order</span></div><div class="ctrack"><div class="cfill cost" style="--w:2.6%;--bd:2.6s"></div></div><div class="cval">−22</div></div>
+          <div class="crow"><div class="clabel">− Payments <span class="ctag">1.8%</span></div><div class="ctrack"><div class="cfill cost" style="--w:1.8%;--bd:2.9s"></div></div><div class="cval">−15</div></div>
+          <div class="crow totalrow"><div class="clabel">Contribution margin<span class="cmchip">76%</span></div><div class="ctrack"><div class="cfill cm" style="--w:76%;--bd:3.3s"></div></div><div class="cval">Rs.644</div></div>
         </div>
       </div>
     </section>
