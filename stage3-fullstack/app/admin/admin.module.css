@@ -1,0 +1,108 @@
+/* Admin dashboard layout. Global utility classes (card/btn/notice/table) come
+   from app/globals.css; these handle admin-specific layout only. Brand accent
+   red #ef4444 is inherited via the global --accent custom property. */
+
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.topbarActions {
+  display: flex;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+/* --- stat cards --- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.statValue {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.statSub {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* --- filters --- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filterField {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+}
+.filterField label {
+  margin-top: 0;
+}
+
+.filterActions {
+  display: flex;
+  gap: 0.6rem;
+  margin-left: auto;
+}
+
+/* --- table --- */
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.table {
+  min-width: 760px;
+}
+.table th,
+.table td {
+  white-space: nowrap;
+}
+.table tbody tr:hover {
+  background: #fafafa;
+}
+
+/* --- login --- */
+.loginCard {
+  max-width: 420px;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .filterActions {
+    margin-left: 0;
+    width: 100%;
+  }
+}
