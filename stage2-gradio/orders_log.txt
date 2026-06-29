@@ -1,0 +1,5 @@
+timestamp=2025-06-24 12:14:03 | name=Asha Rao | phone=9876543210 | base=B3:Cheese Burst:229.00 | pizza=P7:BBQ Chicken:379.00 | topping=T2:Extra Cheese:69.00 | unit_price=677.00 | qty=5 | subtotal=3385.00 | discount=338.50 | gst=548.37 | total=3594.87 | payment=UPI
+
+timestamp=2025-06-24 12:31:47 | name=Vikram Singh | phone=8123456789 | base=B1:Thin Crust:149.00 | pizza=P1:Margherita:299.00 | topping=T4:Green Peppers:39.00 | unit_price=487.00 | qty=2 | subtotal=974.00 | discount=0.00 | gst=175.32 | total=1149.32 | payment=Cash
+
+timestamp=2025-06-24 13:02:11 | name=Neha Kapoor | phone=7012345678 | base=B5:Multigrain:169.00 | pizza=P8:Paneer Tikka:349.00 | topping=T10:Peri-Peri Drizzle:59.00 | unit_price=577.00 | qty=1 | subtotal=577.00 | discount=0.00 | gst=103.86 | total=680.86 | payment=Card
