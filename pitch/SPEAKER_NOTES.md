@@ -1,4 +1,4 @@
-# SliceMatic 2-Minute Pitch Script
+# SliceMatic 2-Minute Pitch Script https://omiiii21.github.io/Slicematic_Agentic_Flow/pitch/
 
 Speaker notes for [`pitch/index.html`](index.html). **Target: 2:00 · ~280 words.**
 Pace it calm and deliberate (~140 wpm) — let the visuals carry the weight, don't race.
