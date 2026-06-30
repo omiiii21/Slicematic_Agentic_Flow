@@ -1,7 +1,3 @@
-gradio>=4.0,<5.0
-# Python 3.13 removed the stdlib `audioop` module that gradio's dep `pydub` imports.
-# This backport restores it on 3.13+ (no-op on <=3.12, e.g. the pinned 3.12 on HF Spaces).
+gradio==5.50.0
+# Python 3.13 removed the stdlib `audioop` module that some Gradio deps import; backport restores it.
 audioop-lts; python_version >= "3.13"
-# Gradio 4.x imports `HfFolder` from huggingface_hub, which was removed in huggingface_hub 1.0.
-# Pin the 0.x line that still provides it so gradio 4.x imports cleanly.
-huggingface_hub<1.0

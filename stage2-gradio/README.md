@@ -4,8 +4,7 @@ emoji: 🍕
 colorFrom: red
 colorTo: yellow
 sdk: gradio
-sdk_version: 4.44.1
-python_version: "3.12"
+sdk_version: 5.50.0
 app_file: app.py
 pinned: false
 license: mit
@@ -38,8 +37,7 @@ python tests/test_core.py
 ```
 
 > **On Hugging Face Spaces** the filesystem is ephemeral, so `orders_log.txt` writes won't
-> persist across restarts — fine for a live demo. If the build flags `sdk_version`, set it to a
-> current Gradio 4.x (e.g. `4.44.0`) or remove the line to let `requirements.txt` decide.
+> persist across restarts — fine for a live demo. Runs on **Gradio 5** (Python 3.13-compatible).
 
 Part of the SliceMatic project — full repo:
 <https://github.com/omiiii21/Slicematic_Agentic_Flow>
