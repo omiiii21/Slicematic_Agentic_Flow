@@ -42,8 +42,12 @@ export interface Order {
   payment_mode: PaymentMode;
 }
 
-/** Insert shape for `orders` (id + created_at are DB-generated). */
-export type OrderInsert = Omit<Order, "id" | "created_at">;
+/**
+ * Insert shape for `orders`. `created_at` is DB-generated. `id` is optional: the
+ * client supplies a UUID so the INSERT needs no read-back (keeping `orders`
+ * reads admin-only); the DB default `gen_random_uuid()` still applies if omitted.
+ */
+export type OrderInsert = Omit<Order, "id" | "created_at"> & { id?: string };
 
 /** Row in the `order_items` table (price snapshot at order time). */
 export interface OrderItem {

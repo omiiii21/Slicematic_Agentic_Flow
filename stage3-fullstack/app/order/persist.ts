@@ -3,7 +3,9 @@
  *
  * RLS (supabase/schema.sql) allows anonymous INSERT on `orders` and
  * `order_items`, so the public anon client is sufficient to place an order.
- * Reads are admin-only; we never read here.
+ * Reads are admin-only; we never read here. We generate the order id client-side
+ * (a UUID) so the INSERT needs no read-back — this is why no anon SELECT policy
+ * on `orders` is required, keeping the dashboard's reads admin-only.
  *
  * Persistence is OPTIONAL: when Supabase is unconfigured this module is never
  * called (the caller checks `isSupabaseConfigured()` and confirms offline). All
@@ -43,7 +45,12 @@ export async function persistOrder(args: PersistOrderArgs): Promise<PersistResul
   const { customer, phone, base, pizza, topping, bill, paymentMode } = args;
   const qty = bill.lineItems[0]?.qty ?? 1;
 
+  // Generate the id client-side so the INSERT needs no read-back (no anon SELECT
+  // policy required). crypto.randomUUID is available in every browser over HTTPS.
+  const orderId = crypto.randomUUID();
+
   const orderRow: OrderInsert = {
+    id: orderId,
     customer_name: customer,
     phone,
     quantity: qty,
@@ -55,21 +62,10 @@ export async function persistOrder(args: PersistOrderArgs): Promise<PersistResul
   };
 
   try {
-    const { data: inserted, error: orderErr } = await supabase
-      .from("orders")
-      .insert(orderRow)
-      .select("id")
-      .single();
-
-    if (orderErr || !inserted) {
-      return {
-        ok: false,
-        orderId: null,
-        message: orderErr?.message ?? "Could not save the order header.",
-      };
+    const { error: orderErr } = await supabase.from("orders").insert(orderRow);
+    if (orderErr) {
+      return { ok: false, orderId: null, message: orderErr.message };
     }
-
-    const orderId = (inserted as { id: string }).id;
 
     const items: OrderItemInsert[] = [
       { order_id: orderId, menu_id: base.id, component: "base", unit_price: base.price },
